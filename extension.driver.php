@@ -199,13 +199,18 @@
 					elseif($route['type'] == 'redirect')
 					{
 						$context['page'] = $route['routed'];
+						$url = URL;
+						if ((substr($context['page'], 0, 7) == 'http://') ||
+							(substr($context['page'], 0, 8) == 'https://')) {
+							$url = '';
+						}
 						if($route['http301'] === 'yes')
 						{
-							header("Location:" . URL . $context['page'], true, 301);
+							header("Location:" . $url . $context['page'], true, 301);
 						}
 						else
 						{
-							header("Location:" . URL . $context['page']);
+							header("Location:" . $url . $context['page']);
 						}
 						die;
 					}
